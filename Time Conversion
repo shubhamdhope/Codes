@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static String timeConversion(String s) {
+        // Complete this function
+        
+        if(s.substring(8).equals("PM")){
+            String updated = "";
+            int total=0;
+            if(Integer.parseInt(s.substring(0,2)) == 12){
+                updated = 12 + s.substring(2,8);    
+            }else{
+                total = Integer.parseInt(s.substring(0,2)) + 12;
+                updated = total + s.substring(2,8);    
+            }
+            return updated;
+        }else if(s.substring(8).equals("AM")){
+            int total = Integer.parseInt(s.substring(0,2));
+            String updated="";
+            if(total != 12){
+                if(total<10){
+                    updated = "0" + total + s.substring(2,8);        
+                }else{
+                    updated = total + s.substring(2,8);        
+                }
+            }else{
+                updated = "0"+(12-total) + s.substring(2,8);    
+            }
+            return updated;
+        }
+        return s;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        String result = timeConversion(s);
+        System.out.println(result);
+    }
+}
