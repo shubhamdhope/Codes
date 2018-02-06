@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        long count=0,max=0,min=0;
+        Scanner in = new Scanner(System.in);
+        int[] arr = new int[5];
+        for(int arr_i=0; arr_i < 5; arr_i++){
+            arr[arr_i] = in.nextInt();
+            count = count + arr[arr_i];
+            if(arr_i ==0){
+                max=arr[arr_i];
+                min=arr[arr_i];   
+            }
+            if(min >arr[arr_i]){
+                min=arr[arr_i];
+            }
+            if(arr[arr_i] > max){
+                max=arr[arr_i];
+            }
+        }
+        System.out.print((count-max) + " " + (count-min));
+    }
+}
