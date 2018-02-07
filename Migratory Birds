@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+import java.util.Map.Entry;
+
+public class Solution {
+
+    static int migratoryBirds(int n, int[] ar) {
+        // Complete this function
+        int max=0,idx=0;
+    	TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+    	for (Integer a : ar) {
+    		Integer freq = map.get(a);
+    		map.put(a, (freq == null) ? 1 : freq + 1);
+    	}
+    	for (Entry<Integer, Integer> i : map.entrySet()) {
+			Integer id = i.getKey();
+			Integer value = i.getValue();
+			if(value > max){
+				max = value;
+				idx = id;
+			}
+		}
+		return idx;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int[] ar = new int[n];
+        for(int ar_i = 0; ar_i < n; ar_i++){
+            ar[ar_i] = in.nextInt();
+        }
+        int result = migratoryBirds(n, ar);
+        System.out.println(result);
+    }
+}
