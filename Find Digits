@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int findDigits(int n) {
+    	int count=0;
+    	for (Character c : Integer.toString(n).toCharArray()) {
+			int i = Integer.parseInt((""+c));
+			try{
+				if(n%i==0)
+					count++;
+			}catch(Exception e){
+				continue;
+			}	
+		}
+		return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        for(int a0 = 0; a0 < t; a0++){
+            int n = in.nextInt();
+            int result = findDigits(n);
+            System.out.println(result);
+        }
+        in.close();
+    }
+}
