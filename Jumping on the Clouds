@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int jumpingOnClouds(int[] c, int k) {
+    	int initCloud=c[0];
+    	int E=100;
+    	for (int i = k; i < c.length; i= i+k) {
+			if(c[i] == 1){
+				E = E - 3;
+			}else{
+				E = E - 1;
+			}
+		}
+    	if(initCloud == 1){
+    		E = E - 3;
+		}else{
+			E = E - 1;
+		}
+		return E;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int k = in.nextInt();
+        int[] c = new int[n];
+        for(int c_i = 0; c_i < n; c_i++){
+            c[c_i] = in.nextInt();
+        }
+        int result = jumpingOnClouds(c, k);
+        System.out.println(result);
+        in.close();
+    }
+}
