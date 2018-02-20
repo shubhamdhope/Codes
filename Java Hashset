@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+ public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int t = s.nextInt();
+        String [] pair_left = new String[t];
+        String [] pair_right = new String[t];
+        int [] values = new int[t];
+        for (int i = 0; i < t; i++) {
+            pair_left[i] = s.next();
+            pair_right[i] = s.next();
+        }
+        
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        for (int i = 0; i < t; i++) {
+        	String temp;
+            temp = pair_left[i];
+            temp = temp + " "+ pair_right[i];
+            Integer freq = map.get(temp);
+            map.put(temp, (freq == null) ? 1 : freq + 1);
+            values[i] = map.keySet().size();
+        }
+        for (int i : values) {
+			System.out.println(i);
+		  }
+     }
+}
