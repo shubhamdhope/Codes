@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+
+	static double loss(int arr[]){
+		double initalPrice = arr[0];
+		double quantity = arr[1];
+		double discountInPercent = arr[2];
+		
+		double incresedPrice = (discountInPercent*initalPrice)/100;
+		incresedPrice = incresedPrice + initalPrice;
+		double finalPrice = (incresedPrice*discountInPercent)/100;
+		
+		double difference = Math.abs(incresedPrice - finalPrice);
+		return Math.abs(initalPrice - difference)*quantity;
+		
+	}
+	
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        int T = in.nextInt();
+        int[] inputArr = new int[3];
+        for(int a_i = 0; a_i < T; a_i++){
+        	double totalLoss = 0;
+        	int N = in.nextInt();
+        	for(int b_i = 0; b_i < N; b_i++){
+        		inputArr[0] = in.nextInt();
+        		inputArr[1] = in.nextInt();
+        		inputArr[2] = in.nextInt();
+        		totalLoss = totalLoss +  loss(inputArr);
+            }
+        	System.out.println(totalLoss);
+        }
+        in.close();
+        
+    }
+}
