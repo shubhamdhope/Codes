@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+
+public class Client {
+
+	static ArrayList<String> list1 = null;
+	static String index="";
+	
+	static String[] combinations(int listSize){
+		String length = "";
+		for (int i = 0; i < listSize; i++) {
+			length = length + i;
+		}
+
+		int n = length.length();
+		permute(length, 0, n - 1);
+		String[] indexes = index.split(" ");
+		return indexes;
+	}
+	static void permute(String str, int l, int r) {
+		if (l == r) {
+			index = index + " " + str;
+		}else {
+			for (int i = l; i <= r; i++) {
+				str = swap(str, l, i);
+				permute(str, l + 1, r);
+				str = swap(str, l, i);
+			}
+		}
+	}
+
+	static String swap(String a, int i, int j) {
+		char temp;
+		char[] charArray = a.toCharArray();
+		temp = charArray[i];
+		charArray[i] = charArray[j];
+		charArray[j] = temp;
+		return String.valueOf(charArray);
+	}
+	
+	static int calculateMin(String indx1, String indx2){
+		int x1,x2,y1,y2;
+		x1 = Integer.parseInt(indx1.split(" ")[0]);
+		y1 = Integer.parseInt(indx1.split(" ")[1]);
+		x2 = Integer.parseInt(indx2.split(" ")[0]);
+		y2 = Integer.parseInt(indx2.split(" ")[1]);
+		
+		int add1 = Math.abs(x1-x2);
+		int add2 = Math.abs(y1-y2);
+		if(add1 > add2)
+			return add1;
+		else if(add1 < add2)
+			return add2;
+		else
+			return add1;
+		
+	}
+	
+	public static int getMinimumCost(int m, int n,int[][] plot){
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if(plot[i][j] == 1){
+					list.add(i + " " + j);
+				}
+			}
+		}
+		
+		String [] indexes = combinations(list.size());
+		int min = -1;
+		for (int i = 1; i < indexes.length; i++) {
+			String prevIndx="";
+			String currIndx="";
+			int cost=0;
+			String str = indexes[i];
+			
+			for (int j = 0; j < str.length(); j++) {
+				if(j==0){
+					prevIndx = "0";
+					cost = 0;
+				}else{
+					prevIndx = list.get(Integer.parseInt(""+str.toCharArray()[(j-1)]));
+					currIndx = list.get(Integer.parseInt(""+str.toCharArray()[(j)]));
+					
+					int dist =calculateMin(prevIndx, currIndx);
+					int k=j-1;
+					while(k>=0) {
+						prevIndx = list.get(Integer.parseInt(""+str.toCharArray()[(k)]));
+						currIndx = list.get(Integer.parseInt(""+str.toCharArray()[(j)]));
+						dist = Math.max(dist, calculateMin(prevIndx, currIndx) );
+						
+						k--;
+					}
+					cost = cost + dist;
+				}
+			}
+			if(min < 0 || cost < min){
+				min = cost;
+			}
+		}
+		
+		return min;
+	}
+	public static void main(String args[])
+	{
+	    /*
+	        You can use Console input as well with the help of Scanner or BufferedReader classes.
+		Please provide input data in Input box on right side of window.
+	    */
+       int m = 3, n = 4;
+		int[][] plot = {{1, 0, 0, 0},
+	          		  	{1, 0, 0, 0},
+	                  	{0, 0, 1, 0}};    
+		
+	   System.out.println(getMinimumCost(m,n,plot));
+	}
+
+}
+
+
