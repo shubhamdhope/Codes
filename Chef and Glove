@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class Solution {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int total = sc.nextInt();
+		ArrayList<Integer> finger = new ArrayList<>();
+		ArrayList<Integer> glove = new ArrayList<>();
+		for (int i = 0; i < total; i++) {
+			int fingers = sc.nextInt();
+			for (int j = 0; j < fingers; j++) {
+				finger.add(sc.nextInt());
+			}
+			for (int j = 0; j < fingers; j++) {
+				glove.add(sc.nextInt());
+			}
+			
+			boolean front= false,back = false,both = false;
+			for (int j = 0; j < finger.size(); j++) {
+				if(finger.get(j) <= glove.get(j)){
+					front = true;
+				}else{
+					front = false;
+					break;
+				}
+			}
+			for (int k = fingers-1, j=0; k >= 0 && j < fingers; k--, j++) {
+				if(finger.get(j) <= glove.get(k)){
+					back = true;
+				}else{
+					back = false;
+					break;
+				}
+			}
+			if(front == true && back == true){
+				both = true;
+			}
+
+			if(both == true){
+				System.out.println("both");
+			}else if(back == true){
+				System.out.println("back");
+			}else if(front == true){
+				System.out.println("front");
+			}else{
+				System.out.println("none");
+			}
+			finger.clear();
+			glove.clear();
+		}
+		
+	}
+}
