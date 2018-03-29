@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    	Scanner sc = new Scanner(System.in);
+    	int testCase = sc.nextInt();
+    	int anna = sc.nextInt();
+    	int totalcount=0;
+    	int countWOAnna=0;
+    	for (int i = 0; i < testCase; i++) {
+    		int value = sc.nextInt();
+			if( i == anna){
+				countWOAnna = value;
+			}
+			totalcount+= value;
+		}
+    	int charged = sc.nextInt();
+    	countWOAnna = totalcount - countWOAnna;
+    	
+    	if(charged > countWOAnna/2){
+    		System.out.println((charged)-(countWOAnna/2));
+    	}else{
+    		System.out.println("Bon Appetit");
+    	}
+    }
+}
