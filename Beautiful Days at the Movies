@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int beautifulDays(int i, int j, int k) {
+    	int count=0;
+    	while(i<=j){
+    		int num = i;
+    		int reversedNumber = 0;
+    		while(num != 0)
+    	    {
+    	        int remainder = num%10;
+    	        reversedNumber = reversedNumber*10 + remainder;
+    	        num /= 10;
+    	    }
+    		if(Math.abs(i - reversedNumber)%k == 0){
+    			count++;
+    		}
+    		i++;
+    	}
+		return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int i = in.nextInt();
+        int j = in.nextInt();
+        int k = in.nextInt();
+        int result = beautifulDays(i, j, k);
+        System.out.println(result);
+        in.close();
+    }
+}
